@@ -2,8 +2,8 @@ import re
 
 
 def sensor_state_counter(file, succes_test_dict: dict, failed_test_dict: dict):
+    """function that counts the number of messages from handler for each sensor that is OK"""
     with open(file, 'r') as logfile:
-        """function that counts the number of messages from handler for each sensor that is OK"""
         lines = logfile.readlines()
         for line in lines:
             line_big = re.search(r'BIG;\d{2};(\w{6}).*(\w{2});\'$', line)
@@ -34,5 +34,5 @@ if __name__ == '__main__':
         print(f'Device {id} was removed')
 
     print(f'_______________Success test {len(succes_test)} devices________________')
-    for id, amount in succes_test.items():
-        print(f'Device {id} sent {len(amount)} statuses')
+    for id, cnt in succes_test.items():
+        print(f'Device {id} sent {len(cnt)} statuses')
